@@ -4,8 +4,8 @@ MAINTAINER Michael.Bortlik@gmail.com
 # Definition
 	# Set environment variables for docker and entrypoint
     ENV TEAMSPEAK_VERSION="3.0.11.4" \
-     && TEAMSPEAK_SHA1="09e7fc2cb5dddf84f3356ddd555ad361f5854321" \
-	 && TEAMSPEAK_DATA_FOLDER="/teamspeak3/"
+     TEAMSPEAK_SHA1="09e7fc2cb5dddf84f3356ddd555ad361f5854321" \
+	 TEAMSPEAK_DATA_FOLDER="/teamspeak3/"
 	
     VOLUME [${TEAMSPEAK_DATA_FOLDER}]
 	
@@ -14,7 +14,7 @@ MAINTAINER Michael.Bortlik@gmail.com
 
 # Logic
     # Add user and group
-    RUN groupadd -r teamspeak3
+    RUN groupadd -r teamspeak3 \
      && useradd -r -g teamspeak3 teamspeak3
 
     #Install wget
@@ -23,8 +23,9 @@ MAINTAINER Michael.Bortlik@gmail.com
      && rm -r /var/lib/apt/lists/*
 
     # Download TS3 file and extract it into /opt.
+	WORKDIR /opt/
     RUN wget -O teamspeak3-server_linux-amd64.tar.gz http://dl.4players.de/ts/releases/${TEAMSPEAK_VERSION}/teamspeak3-server_linux-amd64-${TEAMSPEAK_VERSION}.tar.gz \
-     && sha1sum -c "${TEAMSPEAK_SHA1} *teamspeak3-server_linux-amd64.tar.gz" \
+     && echo "${TEAMSPEAK_SHA1} teamspeak3-server_linux-amd64.tar.gz" | sha1sum -c - \
      && tar -C /opt -xzf teamspeak3-server_linux-amd64.tar.gz \
      && rm teamspeak3-server_linux-amd64.tar.gz
 
