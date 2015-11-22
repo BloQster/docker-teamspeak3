@@ -5,7 +5,7 @@ MAINTAINER Michael.Bortlik@gmail.com
 	# Set environment variables for docker and entrypoint
     ENV TEAMSPEAK_VERSION="3.0.11.4" \
 		TEAMSPEAK_SHA1="09e7fc2cb5dddf84f3356ddd555ad361f5854321" \
-		TEAMSPEAK_DATA_FOLDER="/teamspeak3/" \
+		TEAMSPEAK_DATA_FOLDER="/teamspeak3" \
 		INSTALL_DIR="/opt"
 
 # Logic

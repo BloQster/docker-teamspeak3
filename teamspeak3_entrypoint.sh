@@ -5,7 +5,7 @@ set -e
 potential_directory_links=('logs' 'files')
 potential_file_links=('licensekey.dat' 'query_ip_blacklist.txt' 'query_ip_whitelist.txt' 'ts3server.sqlitedb' 'ts3server.ini')
 
-# Link directories
+# Link directoriess
 for directory in "${potential_directory_links[@]}"
 do
 	# Create in volume if not existing
@@ -32,5 +32,6 @@ do
 done
 
 # Start Teamspeak server
+chown -R -H teamspeak3:teamspeak3 $INSTALL_DIR/teamspeak3-server_linux-amd64
 export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
-exec start-stop-daemon --start --chuid teamspeak3:teamspeak3 --exec $INSTALL_DIR/teamspeak3-server_linux-amd64/ts3server_linux_amd64
+exec start-stop-daemon --start --chuid teamspeak3:teamspeak3 --chdir $INSTALL_DIR/teamspeak3-server_linux-amd64 --exec $INSTALL_DIR/teamspeak3-server_linux-amd64/ts3server_linux_amd64
