@@ -42,6 +42,6 @@ do
 done
 
 # Start Teamspeak server
-chown -R teamspeak3:teamspeak3 $INSTALL_DIR/teamspeak3-server_linux-amd64 $TEAMSPEAK_DATA_FOLDER
+chown -RL teamspeak3:teamspeak3 $INSTALL_DIR/teamspeak3-server_linux-amd64
 export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
 exec start-stop-daemon --start --chuid teamspeak3:teamspeak3 --chdir $INSTALL_DIR/teamspeak3-server_linux-amd64 --exec $INSTALL_DIR/teamspeak3-server_linux-amd64/ts3server_linux_amd64
