@@ -10,38 +10,38 @@ optional_file_links=('ts3server.ini' 'licensekey.dat' 'serverkey.dat')
 for directory in "${directory_links[@]}"
 do
     # Create directory in volume if it doesn't exist
-    if [ ! -d $TEAMSPEAK_DATA_FOLDER/$directory ]; then	
-        mkdir $TEAMSPEAK_DATA_FOLDER/$directory
+    if [ ! -d $TEAMSPEAK_DATAFOLDER/$directory ]; then	
+        mkdir -p $TEAMSPEAK_DATAFOLDER/$directory
     fi
 
     # Recreate symlink
-    rm -rf $INSTALL_DIR/teamspeak3-server_linux-amd64/$directory
-    ln -sf $TEAMSPEAK_DATA_FOLDER/$directory $INSTALL_DIR/teamspeak3-server_linux-amd64/$directory	
+    rm -rf $TEAMSPEAK_INSTALLDIR/$directory
+    ln -sf $TEAMSPEAK_DATAFOLDER/$directory $TEAMSPEAK_INSTALLDIR/$directory	
 done
 
 # Symlink files
 for file in "${file_links[@]}"
 do
     # Create file in volume if it doesn't exist
-    if [ ! -f $TEAMSPEAK_DATA_FOLDER/$file ]; then
-        touch $TEAMSPEAK_DATA_FOLDER/$file
-    fi	
+    if [ ! -f $TEAMSPEAK_DATAFOLDER/$file ]; then
+        touch $TEAMSPEAK_DATAFOLDER/$file
+    fi
 
     # Recreate symlink
-    rm -rf $INSTALL_DIR/teamspeak3-server_linux-amd64/$file
-    ln -sf $TEAMSPEAK_DATA_FOLDER/$file $INSTALL_DIR/teamspeak3-server_linux-amd64/$file
+    rm -f $TEAMSPEAK_INSTALLDIR/$file
+    ln -sf $TEAMSPEAK_DATAFOLDER/$file $INSTALL_DIR/$file
 done
 
 # Symlink optional files
 for file in "${optional_file_links[@]}"
 do
     # Create symlink to file if it exists
-    if [ -f $TEAMSPEAK_DATA_FOLDER/$file ]; then
-        ln -sf $TEAMSPEAK_DATA_FOLDER/$file $INSTALL_DIR/teamspeak3-server_linux-amd64/$file
+    if [ -f $TEAMSPEAK_DATAFOLDER/$file ]; then
+        ln -sf $TEAMSPEAK_DATAFOLDER/$file $TEAMSPEAK_INSTALLDIR/$file
     fi
 done
 
 # Set correct ownership and start Teamspeak server
-chown -RL teamspeak3:teamspeak3 $INSTALL_DIR/teamspeak3-server_linux-amd64
+chown -RL teamspeak3:teamspeak3 $TEAMSPEAK_INSTALLDIR
 export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
-exec start-stop-daemon --start --chuid teamspeak3:teamspeak3 --chdir $INSTALL_DIR/teamspeak3-server_linux-amd64 --exec $INSTALL_DIR/teamspeak3-server_linux-amd64/ts3server_linux_amd64
+exec start-stop-daemon --start --chuid teamspeak3:teamspeak3 --chdir $TEAMSPEAK_INSTALLDIR --exec $TEAMSPEAK_INSTALLDIR/ts3server_linux_amd64
