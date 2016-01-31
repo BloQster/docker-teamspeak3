@@ -17,8 +17,8 @@ RUN apt-get update \
 
 # Download TS3 file and extract it into the install directory
 RUN mkdir -p ${TEAMSPEAK_INSTALLDIR} \
- && curl -s http://dl.4players.de/ts/releases/${TEAMSPEAK_VERSION}/teamspeak3-server_linux-amd64-${TEAMSPEAK_VERSION}.tar.gz \
-  | tar -xvz -C ${TEAMSPEAK_INSTALLDIR} --strip-components 1
+ && curl -s http://dl.4players.de/ts/releases/${TEAMSPEAK_VERSION}/teamspeak3-server_linux-amd64-${TEAMSPEAK_VERSION}.tar.bz2 \
+  | tar -xvj -C ${TEAMSPEAK_INSTALLDIR} --strip-components 1
 	 
 # Volume for persistent data and configuration files
 VOLUME ${TEAMSPEAK_DATAFOLDER}
