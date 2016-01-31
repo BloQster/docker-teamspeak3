@@ -2,7 +2,7 @@ FROM debian:jessie
 MAINTAINER Michael Bortlik <Michael.Bortlik@gmail.com>
 
 # Set environment variables for build and entrypoint
-ENV TEAMSPEAK_VERSION="3.0.11.4" \
+ENV TEAMSPEAK_VERSION="3.0.12" \
     TEAMSPEAK_DATAFOLDER="/etc/teamspeak3" \
     TEAMSPEAK_INSTALLDIR="/opt/teamspeak3"
 
