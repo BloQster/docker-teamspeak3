@@ -44,4 +44,4 @@ done
 # Set correct ownership and start Teamspeak server
 chown -RL teamspeak3:teamspeak3 $TEAMSPEAK_INSTALLDIR
 export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
-exec start-stop-daemon --start --chuid teamspeak3:teamspeak3 --chdir $TEAMSPEAK_INSTALLDIR --exec $TEAMSPEAK_INSTALLDIR/ts3server_linux_amd64
+exec start-stop-daemon --start --chuid teamspeak3:teamspeak3 --chdir $TEAMSPEAK_INSTALLDIR --exec $TEAMSPEAK_INSTALLDIR/ts3server
