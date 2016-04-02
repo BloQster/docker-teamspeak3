@@ -29,7 +29,7 @@ do
 
     # Recreate symlink
     rm -f $TEAMSPEAK_INSTALLDIR/$file
-    ln -sf $TEAMSPEAK_DATAFOLDER/$file $INSTALL_DIR/$file
+    ln -sf $TEAMSPEAK_DATAFOLDER/$file $TEAMSPEAK_INSTALLDIR/$file
 done
 
 # Symlink optional files
